@@ -1,45 +1,48 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# Udagram Image Filtering Microservice
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+Udagram is a simple cloud application developed alongside the Udacity Cloud Engineering Nanodegree. It allows users to register and log into a web client, post photos to the feed, and process photos using an image filtering microservice.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+The project is split into three parts:
+1. [The Simple Frontend](https://github.com/udacity/cloud-developer/tree/master/course-02/exercises/udacity-c2-frontend)
+A basic Ionic client web application which consumes the RestAPI Backend. [Covered in the course]
+2. [The RestAPI Backend](https://github.com/udacity/cloud-developer/tree/master/course-02/exercises/udacity-c2-restapi), a Node-Express server which can be deployed to a cloud service. [Covered in the course]
+3. [The Image Filtering Microservice](https://github.com/udacity/cloud-developer/tree/master/course-02/project/image-filter-starter-code), the final project for the course. It is a Node-Express application which runs a simple script to process images. [Your assignment]
 
----
+## Tasks
 
-## Edit a file
+### Setup Node Environment
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+You'll need to create a new node server. Open a new terminal within the project directory and run:
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+1. Initialize a new project: `npm i`
+2. run the development server with `npm run dev`
 
----
+### Create a new endpoint in the server.ts file
 
-## Create a file
+The starter code has a task for you to complete an endpoint in `./src/server.ts` which uses query parameter to download an image from a public URL, filter the image, and return the result.
 
-Next, you’ll add a new file to this repository.
+We've included a few helper functions to handle some of these concepts and we're importing it for you at the top of the `./src/server.ts`  file.
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+```typescript
+import {filterImageFromURL, deleteLocalFiles} from './util/util';
+```
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+### Deploying your system
 
----
+Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! Don't forget you can use `eb deploy` to push changes.
 
-## Clone a repository
+## Stand Out (Optional)
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+### Refactor the course RESTapi
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+If you're feeling up to it, refactor the course RESTapi to make a request to your newly provisioned image server.
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+### Authentication
+
+Prevent requests without valid authentication headers.
+> !!NOTE if you choose to submit this, make sure to add the token to the postman collection and export the postman collection file to your submission so we can review!
+
+### Custom Domain Name
+
+Add your own domain name and have it point to the running services (try adding a subdomain name to point to the processing server)
+> !NOTE: Domain names are not included in AWS’ free tier and will incur a cost.
